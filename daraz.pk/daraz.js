@@ -1,17 +1,18 @@
 const puppeteer = require('puppeteer');
-const utils = require('./utils');
+const utils = require('../utils');
 
 (async () => {
     
     url="https://www.daraz.pk/laptops/?spm=a2a0e.home.cate_1.4.35e349373bwClC";
     totalPages =4;
+
     const browser = await puppeteer.launch( {'headless' : true} );
     console.log("browser launched...");
 
     const page = await browser.newPage();
     page.setDefaultNavigationTimeout(0);
     await page.goto(url, {waitUntil: 'networkidle2'});
-    console.log("page opened...");
+    console.log("URL Loaded...");
 
     var results = [];
     for(let currentPage = 0; currentPage < totalPages ; currentPage++)
@@ -21,7 +22,7 @@ const utils = require('./utils');
         await page.click("li[title='Next Page']>.ant-pagination-item-link");
         await page.reload();
     }
-    utls.StoreJSON(results,'./data.json');
+    utils.StoreJSON(results,'./data.json');
 
     await browser.close();
 })();
