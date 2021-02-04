@@ -18,5 +18,17 @@ exports.StoreJSON = (myArray,path)=>{
             }
         }
     );
-    console.log('data.json File Created.');
+    console.log(`File Created at ${path}`);
+}
+
+exports.ArrayToTxt = (myArray,path)=>{
+    content=myArray.toString();
+    fs.writeFile(path,content,
+        function (err) {
+            if (err) {
+                console.error('File Was Not Created.');
+            }
+        }
+    );
+    console.log(`File Created at ${path}`);
 }
