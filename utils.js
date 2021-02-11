@@ -1,13 +1,12 @@
 const fs = require('fs');
 const request = require('request');
+const fetch = require('node-fetch');
 
-exports.download = (url, path, callback)=>{
-    request.head(url, (err, res, body) => {
-        request(url)
-            .pipe(fs.createWriteStream(path))
-            .on('close', callback);
-    });
-}
+exports.download = async function(url, filename, callback){
+    const response = await fetch(url);
+    const buffer = await response.buffer();
+    fs.writeFile(filename, buffer, callback);
+};
 
 exports.StoreJSON = (myArray,path)=>{
     content=JSON.stringify(myArray,null,3);
