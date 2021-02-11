@@ -4,7 +4,7 @@ const fs = require('fs');
 
 (async () => {
     
-    url=`https://manganelo.link/manga/ultimate-scheming-system/chapter-1/`;
+    url=process.argv[2];
     
     const browser = await puppeteer.launch( {'headless' : true} );
     console.log("browser launched...");
@@ -33,10 +33,12 @@ const fs = require('fs');
 
     for (let i = 0; i < results.length; i++) 
     {
-        utils.download(results[i],`./${mangaName}/Chapter${chapterNo}/${i}.jpg`,()=>{
-            console.log("downloading "+i+ ".jpg");
+        utils.download(results[i],`./${mangaName}/Chapter${chapterNo}/${i}.jpg`,(err)=>{
+            if(err) throw err;
         });
     }
+    console.log(`Chapter ${chapterNo} Downloaded`);
+
     await browser.close();
 })();
 

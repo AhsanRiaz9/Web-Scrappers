@@ -4,9 +4,12 @@ const fetch = require('node-fetch');
 
 exports.download = async function(url, filename, callback){
     try{
-        const response = await fetch(url);
-        const buffer = await response.buffer();
-        fs.writeFile(filename, buffer, callback);
+        if(!fs.existsSync(filename))
+        {
+            const response = await fetch(url);
+            const buffer = await response.buffer();
+            fs.writeFile(filename, buffer, callback);
+        }
     }
     catch(e){
         console.log(e);
