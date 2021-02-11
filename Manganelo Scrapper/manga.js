@@ -4,7 +4,7 @@ const fs = require('fs');
 
 (async () => {
     
-    url=process.argv[2];
+    url = process.argv[2];
     
     const browser = await puppeteer.launch( {'headless' : true} );
     console.log("browser launched...");
@@ -34,7 +34,12 @@ const fs = require('fs');
     for (let i = 0; i < results.length; i++) 
     {
         utils.download(results[i],`./${mangaName}/Chapter${chapterNo}/${i}.jpg`,(err)=>{
-            if(err) throw err;
+            if(err) 
+                throw err;
+            else
+            {
+                console.log(`${i}.jpg done`);
+            }
         });
     }
     console.log(`Chapter ${chapterNo} Downloaded`);
