@@ -2,7 +2,7 @@ import { launch } from 'puppeteer';
 
 (async () => {
     
-    username = "faateh.sultan";
+    username = "__omerbhatti__";
     url=`https://www.instagram.com/${username}`;
     
     const browser = await launch( {'headless' : true} );
