@@ -57,3 +57,27 @@ exports.searchInArray = (str, strArray)=> {
     }
     return -1;
 }
+
+exports.padded = (num , format) => {
+    var str = "" + num;
+    var ans = format.substring(0, format.length - str.length) + str;
+    return ans;
+}
+
+exports.shuffle = (array)=> {
+    var currentIndex = array.length, temporaryValue, randomIndex;
+    
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) 
+    {
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+        // And swap it with the current element.
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+}
