@@ -1,8 +1,7 @@
 from bs4 import BeautifulSoup
 import sys, time ,requests, os
 
-
-url = input("Enter manglnelo.live URL: e.g https://manganelo.link/manga/shingeki-no-kyojin/shingeki-no-kyojin-chapter-129/")
+url = input("Enter URL: ")
 
 def progressbar(it,prefix="",size=60, file=sys.stdout):
     count = len(it)
@@ -27,8 +26,12 @@ def download(url,folder,image_name):
         f.write(response)
     time.sleep(0.1)
 
-page = requests.get(url)
-soup = BeautifulSoup(page.content, 'html.parser')
+try:
+    page = requests.get(url)
+    soup = BeautifulSoup(page.content, 'html.parser')
+except:
+    print("Please Enter Valid URL e.g  https://manganelo.link/manga/shingeki-no-kyojin/shingeki-no-kyojin-chapter-129/!\nExitting...")
+    sys.exit()
 
 heading = soup.find("h1",id='chapter-heading').get_text().split(' ')
 chapter=heading[-1]
